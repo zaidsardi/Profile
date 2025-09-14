@@ -58,9 +58,17 @@
             transition: all 0.3s ease;
         }
 
+        [data-theme="light"] nav {
+            background: rgba(248, 250, 252, 0.9);
+        }
+
         nav.scrolled {
             background: rgba(15, 23, 42, 0.95);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        [data-theme="light"] nav.scrolled {
+            background: rgba(248, 250, 252, 0.95);
         }
 
         .nav-container {
@@ -601,7 +609,7 @@
             <h2 class="section-title" data-i18n="aboutMe">About Me</h2>
             <div class="profile-content">
                 <div class="profile-image">
-                    <img src="Images\King Maegor I Targaryen (Maegor the Cruel)_22.jpg" alt="Zaid Sardi">
+                    <img src="Images/King Maegor I Targaryen (Maegor the Cruel)_22.jpg" alt="Zaid Sardi">
                 </div>
                 <div class="profile-text">
                     <h3 data-i18n="greeting">Hello, I'm Zaid!</h3>
@@ -706,16 +714,19 @@
                     <div class="contact-info">
                         <div class="contact-item">
                             <a href="https://www.instagram.com/xq.6z/" target="_blank">
+                                <img src="Images/instagram.png" alt="Instagram" style="width: 20px; height: 20px;">
                                 <span data-i18n="followInstagram">Follow on Instagram</span>
                             </a>
                         </div>
                         <div class="contact-item">
                             <a href="https://www.linkedin.com/in/zaid-al-sardi-5b9995293/" target="_blank">
+                                <img src="Images/linkedin.png" alt="LinkedIn" style="width: 20px; height: 20px;">
                                 <span data-i18n="connectLinkedIn">Connect on LinkedIn</span>
                             </a>
                         </div>
                         <div class="contact-item">
                             <a href="https://github.com/zaidsardi" target="_blank">
+                                <img src="Images/github.png" alt="GitHub" style="width: 20px; height: 20px;">
                                 <span data-i18n="viewGitHub">View on GitHub</span>
                             </a>
                         </div>
