@@ -32,7 +32,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><rect x="0" y="0" width="4" height="4" fill="%236366f1"/><rect x="4" y="0" width="4" height="4" fill="%236366f1"/><rect x="8" y="0" width="4" height="4" fill="%236366f1"/><rect x="12" y="0" width="4" height="4" fill="%236366f1"/><rect x="0" y="4" width="4" height="4" fill="%236366f1"/><rect x="0" y="8" width="4" height="4" fill="%236366f1"/><rect x="0" y="12" width="4" height="4" fill="%236366f1"/><rect x="4" y="12" width="4" height="4" fill="%236366f1"/><rect x="8" y="12" width="4" height="4" fill="%236366f1"/><rect x="12" y="12" width="4" height="4" fill="%236366f1"/><rect x="12" y="4" width="4" height="4" fill="%236366f1"/><rect x="12" y="8" width="4" height="4" fill="%236366f1"/></svg>'), auto;
+            cursor: none; /* Hide default cursor */
         }
 
         body {
@@ -45,8 +45,21 @@
             image-rendering: pixelated;
         }
 
-        a, button, .toggle-btn, .cta-button, .submit-btn, .mobile-menu span {
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><rect x="0" y="0" width="4" height="4" fill="%238b5cf6"/><rect x="4" y="0" width="4" height="4" fill="%238b5cf6"/><rect x="8" y="0" width="4" height="4" fill="%238b5cf6"/><rect x="12" y="0" width="4" height="4" fill="%238b5cf6"/><rect x="0" y="4" width="4" height="4" fill="%238b5cf6"/><rect x="0" y="8" width="4" height="4" fill="%238b5cf6"/><rect x="0" y="12" width="4" height="4" fill="%238b5cf6"/><rect x="4" y="12" width="4" height="4" fill="%238b5cf6"/><rect x="8" y="12" width="4" height="4" fill="%238b5cf6"/><rect x="12" y="12" width="4" height="4" fill="%238b5cf6"/><rect x="12" y="4" width="4" height="4" fill="%238b5cf6"/><rect x="12" y="8" width="4" height="4" fill="%238b5cf6"/></svg>'), auto;
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            z-index: 9999;
+            pointer-events: none;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><rect x="0" y="0" width="4" height="4" fill="%236366f1"/><rect x="4" y="0" width="4" height="4" fill="%236366f1"/><rect x="8" y="0" width="4" height="4" fill="%236366f1"/><rect x="12" y="0" width="4" height="4" fill="%236366f1"/><rect x="16" y="0" width="4" height="4" fill="%236366f1"/><rect x="0" y="4" width="4" height="4" fill="%236366f1"/><rect x="0" y="8" width="4" height="4" fill="%236366f1"/><rect x="0" y="12" width="4" height="4" fill="%236366f1"/><rect x="0" y="16" width="4" height="4" fill="%236366f1"/><rect x="4" y="16" width="4" height="4" fill="%236366f1"/><rect x="8" y="16" width="4" height="4" fill="%236366f1"/><rect x="12" y="16" width="4" height="4" fill="%236366f1"/><rect x="16" y="16" width="4" height="4" fill="%236366f1"/><rect x="16" y="4" width="4" height="4" fill="%236366f1"/><rect x="16" y="8" width="4" height="4" fill="%236366f1"/><rect x="16" y="12" width="4" height="4" fill="%236366f1"/></svg>') no-repeat center center;
+            transition: transform 0.1s ease;
+        }
+
+        .cursor.click {
+            transform: scale(0.8);
         }
 
         .container {
@@ -133,7 +146,6 @@
         .mobile-menu {
             display: none;
             flex-direction: column;
-            cursor: pointer;
         }
 
         .mobile-menu span {
@@ -157,7 +169,6 @@
             border: none;
             border-radius: 0;
             padding: 0.5rem;
-            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -530,7 +541,6 @@
             color: white;
             border: none;
             padding: 1rem 2rem;
-            cursor: pointer;
             transition: all 0.3s ease;
             font-family: 'Press Start 2P', cursive;
             font-size: 0.8rem;
@@ -665,6 +675,8 @@
     </style>
 </head>
 <body>
+    <div class="cursor"></div>
+    
     <nav id="navbar">
         <div class="container">
             <div class="nav-container">
@@ -839,6 +851,22 @@
     </footer>
 
     <script>
+        // Custom cursor functionality
+        const cursor = document.querySelector('.cursor');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+        
+        document.addEventListener('mousedown', () => {
+            cursor.classList.add('click');
+        });
+        
+        document.addEventListener('mouseup', () => {
+            cursor.classList.remove('click');
+        });
+        
         // Mobile menu toggle
         const mobileMenu = document.getElementById('mobile-menu');
         const navLinks = document.getElementById('nav-links');
