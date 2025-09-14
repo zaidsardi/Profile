@@ -17,6 +17,15 @@
             --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
         }
 
+        :root[data-theme="light"] {
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --bg-primary: #f8fafc;
+            --bg-secondary: #e2e8f0;
+            --bg-card: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -29,6 +38,7 @@
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .container {
@@ -113,6 +123,55 @@
             background: var(--text-primary);
             margin: 3px 0;
             transition: 0.3s;
+        }
+
+        /* Theme and Language Toggles */
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .toggle-btn {
+            background: var(--bg-secondary);
+            border: none;
+            border-radius: 50px;
+            padding: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: var(--text-primary);
+            position: relative;
+            width: 50px;
+            height: 30px;
+        }
+
+        .toggle-btn:hover {
+            background: var(--bg-card);
+        }
+
+        .toggle-btn.language {
+            width: auto;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .theme-toggle-inner {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--gradient);
+            transition: transform 0.3s ease;
+        }
+
+        [data-theme="light"] .theme-toggle-inner {
+            transform: translateX(20px);
         }
 
         /* Hero Section */
@@ -426,6 +485,21 @@
             }
         }
 
+        /* RTL Support */
+        [dir="rtl"] {
+            text-align: right;
+        }
+
+        [dir="rtl"] .nav-links a::after {
+            left: auto;
+            right: 0;
+        }
+
+        [dir="rtl"] .profile-content,
+        [dir="rtl"] .contact-content {
+            direction: rtl;
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .nav-links {
@@ -478,6 +552,11 @@
             .section-title {
                 font-size: 2rem;
             }
+
+            .nav-controls {
+                margin-left: auto;
+                margin-right: 1rem;
+            }
         }
     </style>
 </head>
@@ -487,11 +566,17 @@
             <div class="nav-container">
                 <div class="logo">Zaid Sardi</div>
                 <ul class="nav-links" id="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#profile">About</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#home" data-i18n="home">Home</a></li>
+                    <li><a href="#profile" data-i18n="about">About</a></li>
+                    <li><a href="#portfolio" data-i18n="portfolio">Portfolio</a></li>
+                    <li><a href="#contact" data-i18n="contact">Contact</a></li>
                 </ul>
+                <div class="nav-controls">
+                    <button class="toggle-btn" id="theme-toggle" aria-label="Toggle dark/light mode">
+                        <span class="theme-toggle-inner"></span>
+                    </button>
+                    <button class="toggle-btn language" id="language-toggle" data-lang="en">AR</button>
+                </div>
                 <div class="mobile-menu" id="mobile-menu">
                     <span></span>
                     <span></span>
@@ -504,31 +589,31 @@
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Zaid Sardi</h1>
-                <p class="tagline">Computer Science Student & AI Enthusiast</p>
-                <a href="#portfolio" class="cta-button">View My Work</a>
+                <h1 data-i18n="name">Zaid Sardi</h1>
+                <p class="tagline" data-i18n="tagline">Computer Science Student & AI Enthusiast</p>
+                <a href="#portfolio" class="cta-button" data-i18n="viewWork">View My Work</a>
             </div>
         </div>
     </section>
 
     <section id="profile" class="profile">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
+            <h2 class="section-title" data-i18n="aboutMe">About Me</h2>
             <div class="profile-content">
                 <div class="profile-image">
                     <img src="Images\King Maegor I Targaryen (Maegor the Cruel)_22.jpg" alt="Zaid Sardi">
                 </div>
                 <div class="profile-text">
-                    <h3>Hello, I'm Zaid!</h3>
-                    <p>I'm a dedicated Computer Science student with a passion for Artificial Intelligence and mobile development. I love exploring cutting-edge technologies and building innovative solutions that solve real-world problems.</p>
+                    <h3 data-i18n="greeting">Hello, I'm Zaid!</h3>
+                    <p data-i18n="bio">I'm a dedicated Computer Science student with a passion for Artificial Intelligence and mobile development. I love exploring cutting-edge technologies and building innovative solutions that solve real-world problems.</p>
                     
                     <div class="skills">
                         <div class="skill">Java</div>
                         <div class="skill">Python</div>
                         <div class="skill">C++</div>
                         <div class="skill">AI/ML</div>
-                        <div class="skill">Mobile Dev</div>
-                        <div class="skill">Data Science</div>
+                        <div class="skill" data-i18n="mobileDev">Mobile Dev</div>
+                        <div class="skill" data-i18n="dataScience">Data Science</div>
                     </div>
                     
                     <div class="contact-info">
@@ -544,13 +629,13 @@
 
     <section id="portfolio" class="portfolio">
         <div class="container">
-            <h2 class="section-title">My Portfolio</h2>
+            <h2 class="section-title" data-i18n="myPortfolio">My Portfolio</h2>
             <div class="portfolio-grid">
                 <div class="project-card">
                     <div class="project-image">🤖</div>
                     <div class="project-content">
-                        <h3>AI Chatbot</h3>
-                        <p>An intelligent conversational AI built with Python and machine learning algorithms for natural language processing and understanding.</p>
+                        <h3 data-i18n="project1Title">AI Chatbot</h3>
+                        <p data-i18n="project1Desc">An intelligent conversational AI built with Python and machine learning algorithms for natural language processing and understanding.</p>
                         <div class="project-tech">
                             <span class="tech-tag">Python</span>
                             <span class="tech-tag">AI/ML</span>
@@ -562,12 +647,12 @@
                 <div class="project-card">
                     <div class="project-image">📱</div>
                     <div class="project-content">
-                        <h3>Mobile Task Manager</h3>
-                        <p>A cross-platform mobile application for task management with real-time synchronization and intuitive user interface design.</p>
+                        <h3 data-i18n="project2Title">Mobile Task Manager</h3>
+                        <p data-i18n="project2Desc">A cross-platform mobile application for task management with real-time synchronization and intuitive user interface design.</p>
                         <div class="project-tech">
                             <span class="tech-tag">Java</span>
                             <span class="tech-tag">Android</span>
-                            <span class="tech-tag">Mobile UI</span>
+                            <span class="tech-tag" data-i18n="mobileUI">Mobile UI</span>
                         </div>
                     </div>
                 </div>
@@ -575,11 +660,11 @@
                 <div class="project-card">
                     <div class="project-image">📊</div>
                     <div class="project-content">
-                        <h3>Data Analysis Tool</h3>
-                        <p>A comprehensive data analysis and visualization tool built with C++ for processing large datasets and generating insights.</p>
+                        <h3 data-i18n="project3Title">Data Analysis Tool</h3>
+                        <p data-i18n="project3Desc">A comprehensive data analysis and visualization tool built with C++ for processing large datasets and generating insights.</p>
                         <div class="project-tech">
                             <span class="tech-tag">C++</span>
-                            <span class="tech-tag">Data Science</span>
+                            <span class="tech-tag" data-i18n="dataScience">Data Science</span>
                             <span class="tech-tag">Analytics</span>
                         </div>
                     </div>
@@ -590,51 +675,48 @@
 
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
+            <h2 class="section-title" data-i18n="getInTouch">Get In Touch</h2>
             <div class="contact-content">
                 <div class="contact-form">
                     <form id="contact-form">
                         <div class="form-group">
-                            <label for="name">Name</label>
+                            <label for="name" data-i18n="nameLabel">Name</label>
                             <input type="text" id="name" name="name" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
+                            <label for="email" data-i18n="emailLabel">Email</label>
                             <input type="email" id="email" name="email" required>
                         </div>
                         <div class="form-group">
-                            <label for="subject">Subject</label>
+                            <label for="subject" data-i18n="subjectLabel">Subject</label>
                             <input type="text" id="subject" name="subject" required>
                         </div>
                         <div class="form-group">
-                            <label for="message">Message</label>
+                            <label for="message" data-i18n="messageLabel">Message</label>
                             <textarea id="message" name="message" required></textarea>
                         </div>
-                        <button type="submit" class="submit-btn">Send Message</button>
+                        <button type="submit" class="submit-btn" data-i18n="sendMessage">Send Message</button>
                     </form>
                 </div>
                 
                 <div class="contact-info-section">
-                    <h3>Let's Connect</h3>
-                    <p>I'm always excited to discuss new opportunities, collaborate on interesting projects, or chat about AI and technology. Feel free to reach out through any of these platforms!</p>
+                    <h3 data-i18n="letsConnect">Let's Connect</h3>
+                    <p data-i18n="connectText">I'm always excited to discuss new opportunities, collaborate on interesting projects, or chat about AI and technology. Feel free to reach out through any of these platforms!</p>
                     
                     <div class="contact-info">
                         <div class="contact-item">
                             <a href="https://www.instagram.com/xq.6z/" target="_blank">
-                                <img src="Images/instagram.png" alt="Instagram" style="width: 20px; height: 20px;">
-                                <span>Follow on Instagram</span>
+                                <span data-i18n="followInstagram">Follow on Instagram</span>
                             </a>
                         </div>
                         <div class="contact-item">
                             <a href="https://www.linkedin.com/in/zaid-al-sardi-5b9995293/" target="_blank">
-                                <img src="Images/linkedin.png" alt="LinkedIn" style="width: 20px; height: 20px;">
-                                <span>Connect on LinkedIn</span>
+                                <span data-i18n="connectLinkedIn">Connect on LinkedIn</span>
                             </a>
                         </div>
                         <div class="contact-item">
                             <a href="https://github.com/zaidsardi" target="_blank">
-                                <img src="Images/github.png" alt="GitHub" style="width: 20px; height: 20px;">
-                                <span>View on GitHub</span>
+                                <span data-i18n="viewGitHub">View on GitHub</span>
                             </a>
                         </div>
                     </div>
@@ -645,7 +727,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Zaid Sardi. All rights reserved.</p>
+            <p>&copy; 2025 Zaid Sardi. <span data-i18n="rightsReserved">All rights reserved.</span></p>
         </div>
     </footer>
 
@@ -738,6 +820,137 @@
             card.addEventListener('mouseleave', () => {
                 card.style.transform = 'translateY(0) scale(1)';
             });
+        });
+
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        // Check for saved theme preference or use system preference
+        const currentTheme = localStorage.getItem('theme') || (prefersDarkScheme.matches ? 'dark' : 'light');
+        
+        // Set initial theme
+        if (currentTheme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            let theme = 'dark';
+            if (document.documentElement.getAttribute('data-theme') === 'light') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                theme = 'dark';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                theme = 'light';
+            }
+            localStorage.setItem('theme', theme);
+        });
+
+        // Language toggle functionality
+        const languageToggle = document.getElementById('language-toggle');
+        let currentLang = localStorage.getItem('language') || 'en';
+        
+        // Translation dictionary
+        const translations = {
+            'en': {
+                'home': 'Home',
+                'about': 'About',
+                'portfolio': 'Portfolio',
+                'contact': 'Contact',
+                'name': 'Zaid Sardi',
+                'tagline': 'Computer Science Student & AI Enthusiast',
+                'viewWork': 'View My Work',
+                'aboutMe': 'About Me',
+                'greeting': 'Hello, I\'m Zaid!',
+                'bio': 'I\'m a dedicated Computer Science student with a passion for Artificial Intelligence and mobile development. I love exploring cutting-edge technologies and building innovative solutions that solve real-world problems.',
+                'mobileDev': 'Mobile Dev',
+                'dataScience': 'Data Science',
+                'myPortfolio': 'My Portfolio',
+                'project1Title': 'AI Chatbot',
+                'project1Desc': 'An intelligent conversational AI built with Python and machine learning algorithms for natural language processing and understanding.',
+                'project2Title': 'Mobile Task Manager',
+                'project2Desc': 'A cross-platform mobile application for task management with real-time synchronization and intuitive user interface design.',
+                'project3Title': 'Data Analysis Tool',
+                'project3Desc': 'A comprehensive data analysis and visualization tool built with C++ for processing large datasets and generating insights.',
+                'mobileUI': 'Mobile UI',
+                'getInTouch': 'Get In Touch',
+                'nameLabel': 'Name',
+                'emailLabel': 'Email',
+                'subjectLabel': 'Subject',
+                'messageLabel': 'Message',
+                'sendMessage': 'Send Message',
+                'letsConnect': 'Let\'s Connect',
+                'connectText': 'I\'m always excited to discuss new opportunities, collaborate on interesting projects, or chat about AI and technology. Feel free to reach out through any of these platforms!',
+                'followInstagram': 'Follow on Instagram',
+                'connectLinkedIn': 'Connect on LinkedIn',
+                'viewGitHub': 'View on GitHub',
+                'rightsReserved': 'All rights reserved.'
+            },
+            'ar': {
+                'home': 'الرئيسية',
+                'about': 'عني',
+                'portfolio': 'معرض الأعمال',
+                'contact': 'اتصل',
+                'name': 'زيد سردي',
+                'tagline': 'طالب علوم حاسوب ومهتم بالذكاء الاصطناعي',
+                'viewWork': 'شاهد أعمالي',
+                'aboutMe': 'عني',
+                'greeting': 'مرحباً، أنا زيد!',
+                'bio': 'أنا طالب علوم حاسوب متخصص في الذكاء الاصطناعي وتطوير التطبيقات النقالة. أحب استكشاف التقنيات الحديثة وبناء حلول مبتكرة لمشاكل العالم الحقيقي.',
+                'mobileDev': 'تطوير نقال',
+                'dataScience': 'علم البيانات',
+                'myPortfolio': 'معرض الأعمال',
+                'project1Title': 'مساعد ذكي',
+                'project1Desc': 'مساعد محادثة ذكي مبني باستخدام بايثون وخوارزميات التعلم الآلي لمعالجة وفهم اللغة الطبيعية.',
+                'project2Title': 'مدير المهام النقال',
+                'project2Desc': 'تطبيق نقال متعدد المنصات لإدارة المهام مع مزامنة فورية وتصميم واجهة مستخدم بديهية.',
+                'project3Title': 'أداة تحليل البيانات',
+                'project3Desc': 'أداة شاملة لتحليل وتصور البيانات مبنية بلغة C++ لمعالجة مجموعات البيانات الكبيرة وتوليد insights.',
+                'mobileUI': 'واجهة نقال',
+                'getInTouch': 'اتصل بي',
+                'nameLabel': 'الاسم',
+                'emailLabel': 'البريد الإلكتروني',
+                'subjectLabel': 'الموضوع',
+                'messageLabel': 'الرسالة',
+                'sendMessage': 'إرسال الرسالة',
+                'letsConnect': 'لنتواصل',
+                'connectText': 'أنا متحمس دائمًا لمناقشة الفرص الجديدة والتعاون في مشاريع مثيرة للاهتمام أو الدردشة حول الذكاء الاصطناعي والتكنولوجيا. لا تتردد في التواصل عبر أي من هذه المنصات!',
+                'followInstagram': 'تابعني على إنستغرام',
+                'connectLinkedIn': 'تواصل على لينكدإن',
+                'viewGitHub': 'شاهد أعمالي على غيتهاب',
+                'rightsReserved': 'جميع الحقوق محفوظة.'
+            }
+        };
+
+        // Set initial language
+        function setLanguage(lang) {
+            document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+            document.documentElement.setAttribute('lang', lang);
+            
+            // Update all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            
+            // Update language toggle button text
+            languageToggle.textContent = lang === 'en' ? 'AR' : 'EN';
+            languageToggle.setAttribute('data-lang', lang);
+            
+            // Save preference
+            localStorage.setItem('language', lang);
+            currentLang = lang;
+        }
+
+        // Initialize language
+        setLanguage(currentLang);
+
+        // Toggle language on button click
+        languageToggle.addEventListener('click', () => {
+            const newLang = currentLang === 'en' ? 'ar' : 'en';
+            setLanguage(newLang);
         });
     </script>
 </body>
