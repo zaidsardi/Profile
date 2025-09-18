@@ -240,8 +240,12 @@
             left: 2px;
             width: 22px;
             height: 22px;
-            background: var(--gradient);
             transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            image-rendering: pixelated;
         }
 
         [data-theme="light"] .theme-toggle-inner {
@@ -458,69 +462,55 @@
             color: var(--primary-color);
         }
 
-        /* Portfolio Section */
-        .portfolio-grid {
+        /* Skills Section */
+        .skills-section {
+            background: var(--bg-secondary);
+        }
+
+        .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 2rem;
         }
 
-        .project-card {
-            background: var(--bg-secondary);
-            overflow: hidden;
+        .skill-card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            text-align: center;
             transition: all 0.3s ease;
-            position: relative;
             border: 4px solid var(--primary-color);
             box-shadow: 6px 6px 0px var(--secondary-color);
+            opacity: 0;
+            transform: translateY(20px);
         }
 
-        .project-card:hover {
+        .skill-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .skill-card:hover {
             transform: translate(4px, 4px);
             box-shadow: 2px 2px 0px var(--secondary-color);
         }
 
-        .project-image {
-            width: 100%;
-            height: 200px;
-            background: var(--gradient);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: white;
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
             image-rendering: pixelated;
         }
 
-        .project-content {
-            padding: 1.5rem;
-        }
-
-        .project-content h3 {
+        .skill-card h3 {
             font-size: 1.3rem;
             margin-bottom: 0.5rem;
             color: var(--text-primary);
             text-shadow: 1px 1px 0px var(--primary-color);
         }
 
-        .project-content p {
+        .skill-card p {
             color: var(--text-secondary);
-            margin-bottom: 1rem;
             font-size: 0.9rem;
             line-height: 1.6;
-        }
-
-        .project-tech {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .tech-tag {
-            background: rgba(99, 102, 241, 0.2);
-            color: var(--primary-color);
-            padding: 0.3rem 0.8rem;
-            font-size: 0.7rem;
-            border: 1px solid var(--primary-color);
         }
 
         /* Contact Section */
@@ -687,7 +677,7 @@
             direction: rtl;
         }
 
-        [dir="rtl"] .project-tech {
+        [dir="rtl"] .skills-grid {
             direction: rtl;
         }
 
@@ -771,12 +761,12 @@
                 <ul class="nav-links" id="nav-links">
                     <li><a href="#home" data-i18n="home">Home</a></li>
                     <li><a href="#profile" data-i18n="about">About</a></li>
-                    <li><a href="#portfolio" data-i18n="portfolio">Portfolio</a></li>
+                    <li><a href="#skills" data-i18n="skills">Skills</a></li>
                     <li><a href="#contact" data-i18n="contact">Contact</a></li>
                 </ul>
                 <div class="nav-controls">
                     <button class="toggle-btn" id="theme-toggle" aria-label="Toggle dark/light mode">
-                        <span class="theme-toggle-inner"></span>
+                        <span class="theme-toggle-inner">🌙</span>
                     </button>
                     <button class="toggle-btn language" id="language-toggle" data-lang="en" aria-label="Switch language to Arabic">AR</button>
                 </div>
@@ -794,7 +784,7 @@
             <div class="hero-content">
                 <h1 data-i18n="name">Zaid Sardi</h1>
                 <p class="tagline" data-i18n="tagline">Computer Science Student & AI Enthusiast</p>
-                <a href="#portfolio" class="cta-button" data-i18n="viewWork">View My Work</a>
+                <a href="#skills" class="cta-button" data-i18n="viewSkills">View My Skills</a>
             </div>
         </div>
     </section>
@@ -804,7 +794,7 @@
             <h2 class="section-title" data-i18n="aboutMe">About Me</h2>
             <div class="profile-content">
                 <div class="profile-image">
-                    <img src="Images/b0f87bbb-bd44-4e10-8b17-600f97aa08fe.jpeg">
+                    <img src="Images/b0f87bbb-bd44-4e10-8b17-600f97aa08fe.jpeg" alt="Zaid Sardi">
                 </div>
                 <div class="profile-text">
                     <h3 data-i18n="greeting">Hello, I'm Zaid!</h3>
@@ -830,47 +820,74 @@
         </div>
     </section>
 
-    <section id="portfolio" class="portfolio">
+    <section id="skills" class="skills-section">
         <div class="container">
-            <h2 class="section-title" data-i18n="myPortfolio">My Portfolio</h2>
-            <div class="portfolio-grid">
-                <div class="project-card">
-                    <div class="project-image">🤖</div>
-                    <div class="project-content">
-                        <h3 data-i18n="project1Title">AI Chatbot</h3>
-                        <p data-i18n="project1Desc">An intelligent conversational AI built with Python and machine learning algorithms for natural language processing and understanding.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">AI/ML</span>
-                            <span class="tech-tag">NLP</span>
-                        </div>
-                    </div>
+            <h2 class="section-title" data-i18n="mySkills">My Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">📊</div>
+                    <h3 data-i18n="skill1Title">Data Analyst</h3>
+                    <p data-i18n="skill1Desc">Analyzing and interpreting complex data sets to extract valuable insights.</p>
                 </div>
                 
-                <div class="project-card">
-                    <div class="project-image">📱</div>
-                    <div class="project-content">
-                        <h3 data-i18n="project2Title">Mobile Task Manager</h3>
-                        <p data-i18n="project2Desc">A cross-platform mobile application for task management with real-time synchronization and intuitive user interface design.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Java</span>
-                            <span class="tech-tag">Android</span>
-                            <span class="tech-tag" data-i18n="mobileUI">Mobile UI</span>
-                        </div>
-                    </div>
+                <div class="skill-card">
+                    <div class="skill-icon">⏱️</div>
+                    <h3 data-i18n="skill2Title">Time Management</h3>
+                    <p data-i18n="skill2Desc">Efficiently organizing and prioritizing tasks to maximize productivity.</p>
                 </div>
                 
-                <div class="project-card">
-                    <div class="project-image">📊</div>
-                    <div class="project-content">
-                        <h3 data-i18n="project3Title">Data Analysis Tool</h3>
-                        <p data-i18n="project3Desc">A comprehensive data analysis and visualization tool built with C++ for processing large datasets and generating insights.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">C++</span>
-                            <span class="tech-tag" data-i18n="dataScience">Data Science</span>
-                            <span class="tech-tag">Analytics</span>
-                        </div>
-                    </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🔍</div>
+                    <h3 data-i18n="skill3Title">Problem Solving</h3>
+                    <p data-i18n="skill3Desc">Identifying issues and implementing effective solutions systematically.</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">💡</div>
+                    <h3 data-i18n="skill4Title">Critical Thinking</h3>
+                    <p data-i18n="skill4Desc">Analyzing information objectively to make reasoned judgments.</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">🚀</div>
+                    <h3 data-i18n="skill5Title">Fast Learner</h3>
+                    <p data-i18n="skill5Desc">Quickly acquiring new knowledge and adapting to changing environments.</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">🧩</div>
+                    <h3 data-i18n="skill6Title">OOP</h3>
+                    <p data-i18n="skill6Desc">Object-Oriented Programming principles and design patterns.</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">👥</div>
+                    <h3 data-i18n="skill7Title">Teamwork</h3>
+                    <p data-i18n="skill7Desc">Collaborating effectively with others to achieve common goals.</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">🤖</div>
+                    <h3 data-i18n="skill8Title">AI (Beginner)</h3>
+                    <p data-i18n="skill8Desc">Foundational knowledge in Artificial Intelligence concepts and applications.</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">☕</div>
+                    <h3 data-i18n="skill9Title">Java</h3>
+                    <p data-i18n="skill9Desc">Proficient in Java programming for applications and system development.</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">📚</div>
+                    <h3 data-i18n="skill10Title">Data Structures & Algorithms</h3>
+                    <p data-i18n="skill10Desc">Strong understanding of data organization and algorithm efficiency.</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">🐍</div>
+                    <h3 data-i18n="skill11Title">Python</h3>
+                    <p data-i18n="skill11Desc">Experienced in Python for scripting, automation, and data analysis.</p>
                 </div>
             </div>
         </div>
@@ -969,7 +986,7 @@
             });
             
             // Add hover effects for interactive elements
-            const interactiveElements = document.querySelectorAll('a, button, .skill, .project-card, .toggle-btn, .cta-button, .submit-btn');
+            const interactiveElements = document.querySelectorAll('a, button, .skill, .skill-card, .toggle-btn, .cta-button, .submit-btn');
             interactiveElements.forEach(el => {
                 el.addEventListener('mouseenter', () => {
                     cursor.classList.add('cursor-hover');
@@ -1055,6 +1072,12 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
+                    
+                    // If it's a skill card, add a staggered animation
+                    if (entry.target.classList.contains('skill-card')) {
+                        const index = Array.from(entry.target.parentElement.children).indexOf(entry.target);
+                        entry.target.style.transitionDelay = `${index * 0.1}s`;
+                    }
                 }
             });
         }, observerOptions);
@@ -1062,6 +1085,11 @@
         // Observe all sections except hero
         document.querySelectorAll('section:not(.hero)').forEach(section => {
             observer.observe(section);
+        });
+        
+        // Observe all skill cards for individual animations
+        document.querySelectorAll('.skill-card').forEach(card => {
+            observer.observe(card);
         });
 
         // Contact form handling
@@ -1084,7 +1112,7 @@
         });
 
         // Add some interactive hover effects
-        document.querySelectorAll('.project-card').forEach(card => {
+        document.querySelectorAll('.skill-card').forEach(card => {
             card.addEventListener('mouseenter', () => {
                 card.style.transform = 'translate(4px, 4px)';
                 card.style.boxShadow = '2px 2px 0px var(--secondary-color)';
@@ -1098,6 +1126,7 @@
 
         // Theme toggle functionality
         const themeToggle = document.getElementById('theme-toggle');
+        const themeToggleInner = document.querySelector('.theme-toggle-inner');
         const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
         
         // Check for saved theme preference or use system preference
@@ -1106,6 +1135,9 @@
         // Set initial theme
         if (currentTheme === 'light') {
             document.documentElement.setAttribute('data-theme', 'light');
+            themeToggleInner.textContent = '☀️';
+        } else {
+            themeToggleInner.textContent = '🌙';
         }
         
         themeToggle.addEventListener('click', () => {
@@ -1113,9 +1145,11 @@
             if (document.documentElement.getAttribute('data-theme') === 'light') {
                 document.documentElement.setAttribute('data-theme', 'dark');
                 theme = 'dark';
+                themeToggleInner.textContent = '🌙';
             } else {
                 document.documentElement.setAttribute('data-theme', 'light');
                 theme = 'light';
+                themeToggleInner.textContent = '☀️';
             }
             localStorage.setItem('theme', theme);
         });
@@ -1129,24 +1163,39 @@
             'en': {
                 'home': 'Home',
                 'about': 'About',
-                'portfolio': 'Portfolio',
+                'skills': 'Skills',
                 'contact': 'Contact',
                 'name': 'Zaid Sardi',
                 'tagline': 'Computer Science Student & AI Enthusiast',
-                'viewWork': 'View My Work',
+                'viewSkills': 'View My Skills',
                 'aboutMe': 'About Me',
                 'greeting': 'Hello, I\'m Zaid!',
                 'bio': 'I\'m a dedicated Computer Science student with a passion for Artificial Intelligence and mobile development. I love exploring cutting-edge technologies and building innovative solutions that solve real-world problems.',
                 'mobileDev': 'Mobile Dev',
                 'dataScience': 'Data Science',
-                'myPortfolio': 'My Portfolio',
-                'project1Title': 'AI Chatbot',
-                'project1Desc': 'An intelligent conversational AI built with Python and machine learning algorithms for natural language processing and understanding.',
-                'project2Title': 'Mobile Task Manager',
-                'project2Desc': 'A cross-platform mobile application for task management with real-time synchronization and intuitive user interface design.',
-                'project3Title': 'Data Analysis Tool',
-                'project3Desc': 'A comprehensive data analysis and visualization tool built with C++ for processing large datasets and generating insights.',
-                'mobileUI': 'Mobile UI',
+                'mySkills': 'My Skills',
+                'skill1Title': 'Data Analyst',
+                'skill1Desc': 'Analyzing and interpreting complex data sets to extract valuable insights.',
+                'skill2Title': 'Time Management',
+                'skill2Desc': 'Efficiently organizing and prioritizing tasks to maximize productivity.',
+                'skill3Title': 'Problem Solving',
+                'skill3Desc': 'Identifying issues and implementing effective solutions systematically.',
+                'skill4Title': 'Critical Thinking',
+                'skill4Desc': 'Analyzing information objectively to make reasoned judgments.',
+                'skill5Title': 'Fast Learner',
+                'skill5Desc': 'Quickly acquiring new knowledge and adapting to changing environments.',
+                'skill6Title': 'OOP',
+                'skill6Desc': 'Object-Oriented Programming principles and design patterns.',
+                'skill7Title': 'Teamwork',
+                'skill7Desc': 'Collaborating effectively with others to achieve common goals.',
+                'skill8Title': 'AI (Beginner)',
+                'skill8Desc': 'Foundational knowledge in Artificial Intelligence concepts and applications.',
+                'skill9Title': 'Java',
+                'skill9Desc': 'Proficient in Java programming for applications and system development.',
+                'skill10Title': 'Data Structures & Algorithms',
+                'skill10Desc': 'Strong understanding of data organization and algorithm efficiency.',
+                'skill11Title': 'Python',
+                'skill11Desc': 'Experienced in Python for scripting, automation, and data analysis.',
                 'getInTouch': 'Get In Touch',
                 'nameLabel': 'Name',
                 'emailLabel': 'Email',
@@ -1155,32 +1204,44 @@
                 'sendMessage': 'Send Message',
                 'letsConnect': 'Let\'s Connect',
                 'connectText': 'I\'m always excited to discuss new opportunities, collaborate on interesting projects, or chat about AI and technology. Feel free to reach out through any of these platforms!',
-                'followInstagram': 'Follow on Instagram',
-                'connectLinkedIn': 'Connect on LinkedIn',
-                'viewGitHub': 'View on GitHub',
                 'rightsReserved': 'All rights reserved.'
             },
             'ar': {
                 'home': 'الرئيسية',
                 'about': 'عني',
-                'portfolio': 'معرض الأعمال',
+                'skills': 'المهارات',
                 'contact': 'اتصل',
                 'name': 'زيد سردي',
                 'tagline': 'طالب علوم حاسوب ومهتم بالذكاء الاصطناعي',
-                'viewWork': 'شاهد أعمالي',
+                'viewSkills': 'شاهد مهاراتي',
                 'aboutMe': 'عني',
                 'greeting': 'مرحباً، أنا زيد!',
                 'bio': 'أنا طالب علوم حاسوب متخصص في الذكاء الاصطناعي وتطوير التطبيقات النقالة. أحب استكشاف التقنيات الحديثة وبناء حلول مبتكرة لمشاكل العالم الحقيقي.',
                 'mobileDev': 'تطوير تطبيقات الهاتف',
                 'dataScience': 'علم البيانات',
-                'myPortfolio': 'معرض الأعمال',
-                'project1Title': 'مساعد ذكي',
-                'project1Desc': 'مساعد محادثة ذكي مبني باستخدام بايثون وخوارزميات التعلم الآلي لمعالجة وفهم اللغة الطبيعية.',
-                'project2Title': 'تطبيق مدير المهام',
-                'project2Desc': 'تطبيق نقال متعدد المنصات لإدارة المهام مع مزامنة فورية وتصميم واجهة مستخدم بديهية.',
-                'project3Title': 'أداة تحليل البيانات',
-                'project3Desc': 'أداة شاملة لتحليل وتصور البيانات مبنية بلغة C++ لمعالجة مجموعات البيانات الكبيرة وتوليد insights.',
-                'mobileUI': 'واجهة تطبيقات الهاتف',
+                'mySkills': 'مهاراتي',
+                'skill1Title': 'محلل بيانات',
+                'skill1Desc': 'تحليل وتفسير مجموعات البيانات المعقدة لاستخراج رؤى قيمة.',
+                'skill2Title': 'إدارة الوقت',
+                'skill2Desc': 'تنظيم المهام وتحديد أولوياتها بكفاءة لتعزيز الإنتاجية.',
+                'skill3Title': 'حل المشكلات',
+                'skill3Desc': 'تحديد القضايا وتنفيذ حلول فعالة بشكل منهجي.',
+                'skill4Title': 'التفكير النقدي',
+                'skill4Desc': 'تحليل المعلومات بشكل موضوعي لاتخاذ أحكام مبررة.',
+                'skill5Title': 'التعلم السريع',
+                'skill5Desc': 'اكتساب المعرفة الجديدة بسرعة والتكيف مع البيئات المتغيرة.',
+                'skill6Title': 'البرمجة كائنية التوجه',
+                'skill6Desc': 'مبادئ البرمجة كائنية التوجه وأنماط التصميم.',
+                'skill7Title': 'العمل الجماعي',
+                'skill7Desc': 'التعاون الفعال مع الآخرين لتحقيق الأهداف المشتركة.',
+                'skill8Title': 'الذكاء الاصطناعي (مبتدئ)',
+                'skill8Desc': 'المعرفة الأساسية في مفاهيم وتطبيقات الذكاء الاصطناعي.',
+                'skill9Title': 'جافا',
+                'skill9Desc': 'متمكن في برمجة جافا لتطوير التطبيقات والأنظمة.',
+                'skill10Title': 'هياكل البيانات والخوارزميات',
+                'skill10Desc': 'فهم قوي لتنظيم البيانات وكفاءة الخوارزميات.',
+                'skill11Title': 'بايثون',
+                'skill11Desc': 'خبرة في بايثون للبرمجة النصية والأتمتة وتحليل البيانات.',
                 'getInTouch': 'اتصل بي',
                 'nameLabel': 'الاسم',
                 'emailLabel': 'البريد الإلكتروني',
@@ -1189,9 +1250,6 @@
                 'sendMessage': 'إرسال الرسالة',
                 'letsConnect': 'لنتواصل',
                 'connectText': 'أنا متحمس دائمًا لمناقشة الفرص الجديدة والتعاون في مشاريع مثيرة للاهتمام أو الدردشة حول الذكاء الاصطناعي والتكنولوجيا. لا تتردد في التواصل عبر أي من هذه المنصات!',
-                'followInstagram': 'تابعني على إنستغرام',
-                'connectLinkedIn': 'تواصل على لينكدإن',
-                'viewGitHub': 'شاهد أعمالي على Github',
                 'rightsReserved': 'جميع الحقوق محفوظة.'
             }
         };
